@@ -70,19 +70,6 @@ services:
     networks:
       - immino-network
 
-  converter-service:
-    image: converter-service
-    build:
-      context: ./converter-service
-    ports:
-      - "9050:9050"
-    restart: on-failure
-    depends_on:
-      - catalog-service
-      - customer-service
-    networks:
-      - immino-network
-
   order-service:
     image: order-service
     build:

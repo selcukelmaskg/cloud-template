@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>com.poc</groupId>
-    <artifactId>sol-poc</artifactId>
+    <groupId>com.cloudtemplate</groupId>
+    <artifactId>cloud-template</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Cloud Template</name>
@@ -18,7 +18,6 @@
         <module>eureka-server</module>
         <module>logger-service</module>
         <module>order-service</module>
-        <module>converter-service</module>
         <module>shared</module>
     </modules>
 </project>
