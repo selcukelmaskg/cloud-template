@@ -13,7 +13,7 @@
         <module>api-documentation</module>
         <module>api-gateway</module>
         <module>asset-service</module>
-        <module>catalog-service</module>
+        <module>product-service</module>
         <module>customer-service</module>
         <module>eureka-server</module>
         <module>logger-service</module>
