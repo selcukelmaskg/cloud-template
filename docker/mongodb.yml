@@ -1,0 +1,19 @@
+version: '3'
+services:
+    kgsolpoc-mongodb:
+        image: mongo:4.0.2
+        container_name: mongodb
+        ports:
+            - "27017:27017"
+
+        volumes:
+            - $MONGO_DATA/turkcellbulut/data/db:/data/db/
+            - $MONGO_DATA/turkcellbulut/data/configdb:/data/configdb/
+        # volumes:
+        #     - ~/volumes/jhipster/product-service/mongodb/:/data/db/
+        networks:
+            - kgsolpoc
+
+networks:
+  kgsolpoc:
+    external: true

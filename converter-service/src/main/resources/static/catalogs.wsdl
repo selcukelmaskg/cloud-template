@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.crmpoc.com/catalog" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.crmpoc.com/customer" targetNamespace="http://www.crmpoc.com/customer">
+  <wsdl:types>
+    <xs:schema xmlns:tns="http://www.crmpoc.com/catalog" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.crmpoc.com/catalog">
+    <xs:element name="GetProductDetailsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetProductDetailsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ProductDetails" type="tns:ProductDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAllProductRequest">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAllProductResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="ProductDetails" type="tns:ProductDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SaveProductRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ProductDetails" type="tns:ProductDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UpdateProductRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ProductDetails" type="tns:ProductDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OrderFulfilmentRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="productId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OrderFulfilmentResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="fulfilment" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="ProductDetails">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="price" type="xs:float"/>
+            <xs:element name="currency" type="xs:string"/>
+            <xs:element name="stock" type="xs:long"/>
+            <xs:element name="enable" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="OrderFulfilmentRequest">
+    <wsdl:part element="sch:OrderFulfilmentRequest" name="OrderFulfilmentRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllProductRequest">
+    <wsdl:part element="sch:GetAllProductRequest" name="GetAllProductRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="OrderFulfilmentResponse">
+    <wsdl:part element="sch:OrderFulfilmentResponse" name="OrderFulfilmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllProductResponse">
+    <wsdl:part element="sch:GetAllProductResponse" name="GetAllProductResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetProductDetailsResponse">
+    <wsdl:part element="sch:GetProductDetailsResponse" name="GetProductDetailsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetProductDetailsRequest">
+    <wsdl:part element="sch:GetProductDetailsRequest" name="GetProductDetailsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SaveProductRequest">
+    <wsdl:part element="sch:SaveProductRequest" name="SaveProductRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateProductRequest">
+    <wsdl:part element="sch:UpdateProductRequest" name="UpdateProductRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CatalogPort">
+    <wsdl:operation name="OrderFulfilment">
+      <wsdl:input message="tns:OrderFulfilmentRequest" name="OrderFulfilmentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:OrderFulfilmentResponse" name="OrderFulfilmentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProduct">
+      <wsdl:input message="tns:GetAllProductRequest" name="GetAllProductRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetAllProductResponse" name="GetAllProductResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductDetails">
+      <wsdl:input message="tns:GetProductDetailsRequest" name="GetProductDetailsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetProductDetailsResponse" name="GetProductDetailsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveProduct">
+      <wsdl:input message="tns:SaveProductRequest" name="SaveProductRequest">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProduct">
+      <wsdl:input message="tns:UpdateProductRequest" name="UpdateProductRequest">
+    </wsdl:input>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CatalogPortSoap11" type="tns:CatalogPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="OrderFulfilment">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="OrderFulfilmentRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="OrderFulfilmentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProduct">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetAllProductRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetAllProductResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductDetails">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetProductDetailsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetProductDetailsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveProduct">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="SaveProductRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProduct">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateProductRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CatalogPortService">
+    <wsdl:port binding="tns:CatalogPortSoap11" name="CatalogPortSoap11">
+      <soap:address location="http://172.20.0.10:9080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

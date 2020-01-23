@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.crmpoc.com/catalog"
+           xmlns:tns="http://www.crmpoc.com/catalog" elementFormDefault="qualified">
+    <xs:element name="GetProductDetailsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetProductDetailsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "ProductDetails" type="tns:ProductDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAllProductRequest">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAllProductResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name= "ProductDetails" type="tns:ProductDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SaveProductRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "ProductDetails" type="tns:ProductDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UpdateProductRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "ProductDetails" type="tns:ProductDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OrderFulfilmentRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "productId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OrderFulfilmentResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "fulfilment" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="ProductDetails">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="price" type="xs:float"/>
+            <xs:element name="currency" type="xs:string"/>
+            <xs:element name="stock" type="xs:long"/>
+            <xs:element name="enable" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.crmpoc.com/customer" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.crmpoc.com/customer" targetNamespace="http://www.crmpoc.com/customer">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.crmpoc.com/customer">
+    <xs:element name="GetCustomerDetailsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tckn" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetCustomerDetailsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="CustomerDetails" type="tns:CustomerDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAddressDetailsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAddressDetailsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AddressDetails" type="tns:AddressDetail"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CreateCustomerRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="CustomerDetails" type="tns:CustomerDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CreateAddressRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Address" type="tns:AddressDetail"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UpdateAddressRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Address" type="tns:AddressDetail"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UpdateCustomerRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Customer" type="tns:CustomerDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAllAddressRequest">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAllAddressResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="addresses" type="tns:AddressDetail"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAllCustomerRequest">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAllCustomerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="addresses" type="tns:CustomerDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CustomerValidationRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tckn" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CustomerValidationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="validate" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="CustomerDetails">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="surname" type="xs:string"/>
+            <xs:element name="tckn" type="xs:long"/>
+            <xs:element name="birthYear" type="xs:int"/>
+            <xs:element name="mail" type="xs:string"/>
+            <xs:element name="address" type="tns:AddressDetail"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AddressDetail">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="country" type="xs:string"/>
+            <xs:element name="street" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCustomerDetailsRequest">
+    <wsdl:part element="tns:GetCustomerDetailsRequest" name="GetCustomerDetailsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllCustomerResponse">
+    <wsdl:part element="tns:GetAllCustomerResponse" name="GetAllCustomerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllAddressRequest">
+    <wsdl:part element="tns:GetAllAddressRequest" name="GetAllAddressRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetCustomerDetailsResponse">
+    <wsdl:part element="tns:GetCustomerDetailsResponse" name="GetCustomerDetailsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CustomerValidationResponse">
+    <wsdl:part element="tns:CustomerValidationResponse" name="CustomerValidationResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerRequest">
+    <wsdl:part element="tns:UpdateCustomerRequest" name="UpdateCustomerRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAddressDetailsResponse">
+    <wsdl:part element="tns:GetAddressDetailsResponse" name="GetAddressDetailsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllCustomerRequest">
+    <wsdl:part element="tns:GetAllCustomerRequest" name="GetAllCustomerRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAddressDetailsRequest">
+    <wsdl:part element="tns:GetAddressDetailsRequest" name="GetAddressDetailsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateAddressRequest">
+    <wsdl:part element="tns:CreateAddressRequest" name="CreateAddressRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateCustomerRequest">
+    <wsdl:part element="tns:CreateCustomerRequest" name="CreateCustomerRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllAddressResponse">
+    <wsdl:part element="tns:GetAllAddressResponse" name="GetAllAddressResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateAddressRequest">
+    <wsdl:part element="tns:UpdateAddressRequest" name="UpdateAddressRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CustomerValidationRequest">
+    <wsdl:part element="tns:CustomerValidationRequest" name="CustomerValidationRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CustomerPort">
+    <wsdl:operation name="GetCustomerDetails">
+      <wsdl:input message="tns:GetCustomerDetailsRequest" name="GetCustomerDetailsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetCustomerDetailsResponse" name="GetCustomerDetailsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCustomer">
+      <wsdl:input message="tns:GetAllCustomerRequest" name="GetAllCustomerRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetAllCustomerResponse" name="GetAllCustomerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAddress">
+      <wsdl:input message="tns:GetAllAddressRequest" name="GetAllAddressRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetAllAddressResponse" name="GetAllAddressResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerValidation">
+      <wsdl:input message="tns:CustomerValidationRequest" name="CustomerValidationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CustomerValidationResponse" name="CustomerValidationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <wsdl:input message="tns:UpdateCustomerRequest" name="UpdateCustomerRequest">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressDetails">
+      <wsdl:input message="tns:GetAddressDetailsRequest" name="GetAddressDetailsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetAddressDetailsResponse" name="GetAddressDetailsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAddress">
+      <wsdl:input message="tns:CreateAddressRequest" name="CreateAddressRequest">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCustomer">
+      <wsdl:input message="tns:CreateCustomerRequest" name="CreateCustomerRequest">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAddress">
+      <wsdl:input message="tns:UpdateAddressRequest" name="UpdateAddressRequest">
+    </wsdl:input>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomerPortSoap11" type="tns:CustomerPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetCustomerDetails">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetCustomerDetailsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetCustomerDetailsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCustomer">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetAllCustomerRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetAllCustomerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAddress">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetAllAddressRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetAllAddressResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerValidation">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="CustomerValidationRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CustomerValidationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateCustomerRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressDetails">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetAddressDetailsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetAddressDetailsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAddress">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="CreateAddressRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCustomer">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="CreateCustomerRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAddress">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateAddressRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CustomerPortService">
+    <wsdl:port binding="tns:CustomerPortSoap11" name="CustomerPortSoap11">
+      <soap:address location="http://172.20.0.12:9070/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

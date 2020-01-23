@@ -1,0 +1,11 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongodb:27017
+      database: crmpoc-order-service
+  kafka:
+    bootstrap-servers: kafka:9092
+
+eureka:
+  instance:
+    prefer-ip-address: true

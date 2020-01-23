@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: order-service
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+server:
+  port: 9010
+  servlet:
+    session:
+      cookie:
+        http-only: true
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}-${random.uuid}
+  client:
+    service-url:
+      defaultZone: http://${eureka.server.host}:${eureka.server.port}/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  server:
+    host: localhost
+    port: 8090
+
+
+kafka:
+  topic:
+    log: system-log
+
+management:
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+
+order:
+  message:
+    success: Order successfully completed.
+    fail:
+      customer: Order failed. Customer not found.
+      asset: Order failed. Ip not generated.
+      catalog: Order failed. Product not found.
+      system: Order failed. System error.

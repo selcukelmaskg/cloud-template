@@ -1,0 +1,41 @@
+version: '3'
+services:
+    zookeeper:
+      image: 'bitnami/zookeeper:latest'
+      container_name: zookeeper
+      user: root
+      ports:
+        - '2181:2181'
+      restart: always
+      environment:
+        - ALLOW_ANONYMOUS_LOGIN=yes
+      volumes:
+        - /zookeeper-data:/bitnami/zookeeper     
+      networks:
+        - kgsolpoc
+
+    kafka:
+      image: 'bitnami/kafka:latest'
+      container_name: kafka
+      user: root
+      ports:
+        - '9092:9092'
+      restart: always
+      environment:
+        - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+        - ALLOW_PLAINTEXT_LISTENER=yes
+        - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+      volumes:
+        - /kafka-data:/bitnami/kafka  
+      networks:
+        - kgsolpoc
+
+volumes:
+    zookeeper-data:
+        external: false
+    kafka-data:
+        external: false
+
+networks:
+  kgsolpoc:
+    external: true

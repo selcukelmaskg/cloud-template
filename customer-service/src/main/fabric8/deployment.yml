@@ -1,0 +1,29 @@
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev
+            - name: EUREKA_SERVER_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-boot-bootstrap
+                  key: eureka-host
+            - name: EUREKA_SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-boot-bootstrap
+                  key: eureka-port
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 9060
+              scheme: HTTP
+            initialDelaySeconds: 180
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 9060
+              scheme: HTTP
+            initialDelaySeconds: 30

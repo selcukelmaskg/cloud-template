@@ -1,0 +1,180 @@
+version: '3'
+
+services:
+  eureka-server:
+    image: eureka-server
+    build:
+      context: ./eureka-server
+    ports:
+      - "8090:8090"
+    depends_on:
+      - kafka
+    networks:
+      - immino-network
+
+  api-gateway:
+    image: api-gateway
+    build:
+      context: ./api-gateway
+    ports:
+      - "9060:9060"
+    depends_on:
+      - kafka
+    networks:
+      - immino-network
+
+  api-documentation:
+    image: api-documentation
+    build:
+      context: ./api-documentation
+    ports:
+      - "9040:9040"
+    depends_on:
+      - kafka
+    networks:
+      - immino-network
+
+  asset-service:
+    image: asset-service
+    build:
+      context: ./asset-service
+    ports:
+      - "9030:9030"
+    depends_on:
+      - kafka
+      - mongodb
+    networks:
+      - immino-network
+
+  catalog-service:
+    image: catalog-service
+    build:
+      context: ./catalog-service
+    ports:
+      - "9080:9080"
+    depends_on:
+      - kafka
+      - mysql
+    networks:
+      - immino-network
+
+  customer-service:
+    image: customer-service
+    build:
+      context: ./customer-service
+    ports:
+      - "9070:9070"
+    depends_on:
+      - kafka
+      - mysql
+    networks:
+      - immino-network
+
+  converter-service:
+    image: converter-service
+    build:
+      context: ./converter-service
+    ports:
+      - "9050:9050"
+    restart: on-failure
+    depends_on:
+      - catalog-service
+      - customer-service
+    networks:
+      - immino-network
+
+  order-service:
+    image: order-service
+    build:
+      context: ./order-service
+    ports:
+      - "9010:9010"
+    depends_on:
+      - kafka
+      - mongodb
+    networks:
+      - immino-network
+
+  logger-service:
+    image: logger-service
+    build:
+      context: ./logger-service
+    ports:
+      - "9090:9090"
+    depends_on:
+      - kafka
+      - mongodb
+    restart: on-failure
+    networks:
+      - immino-network
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    build:
+      context: ./docker/mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    networks:
+      - immino-network
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_DATABASE: <database to create>
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - mongo_db_data:/var/lib/mysql
+    networks:
+      - immino-network
+
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    container_name: zookeeper
+    user: root
+    ports:
+      - '2181:2181'
+    restart: always
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    volumes:
+      - zookeeper-data:/bitnami/zookeeper
+    networks:
+      - immino-network
+
+  kafka:
+    image: 'bitnami/kafka:latest'
+    container_name: kafka
+    user: root
+    ports:
+      - '9092:9092'
+    restart: always
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+    volumes:
+      - kafka-data:/bitnami/kafka
+    networks:
+      - immino-network
+
+networks:
+  immino-network:
+
+volumes:
+  mysql_db_data:
+    external: false
+  mongo_db_data:
+    external: false
+  zookeeper-data:
+    external: false
+  kafka-data:
+    external: false

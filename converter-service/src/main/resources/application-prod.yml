@@ -1,0 +1,13 @@
+spring:
+  kafka:
+    bootstrap-servers: kafka:9092
+
+eureka:
+  instance:
+    prefer-ip-address: true
+
+customer-service:
+  url: http://customer-service/ws/customers.wsdl?wsdl
+
+catalog-service:
+  url: http://catalog-service/catalog-service/ws/catalogs.wsdl?wsdl

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.crmpoc.com/customer"
+           xmlns:tns="http://www.crmpoc.com/customer" elementFormDefault="qualified">
+    <xs:element name="GetCustomerDetailsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "tckn" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetCustomerDetailsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "CustomerDetails" type="tns:CustomerDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAddressDetailsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAddressDetailsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "AddressDetails" type="tns:AddressDetail"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CreateCustomerRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "CustomerDetails" type="tns:CustomerDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CreateAddressRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "Address" type="tns:AddressDetail"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UpdateAddressRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "Address" type="tns:AddressDetail"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UpdateCustomerRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "Customer" type="tns:CustomerDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAllAddressRequest">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAllAddressResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name= "addresses" type="tns:AddressDetail"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAllCustomerRequest">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAllCustomerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name= "addresses" type="tns:CustomerDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CustomerValidationRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "tckn" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CustomerValidationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name= "validate" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="CustomerDetails">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="surname" type="xs:string"/>
+            <xs:element name="tckn" type="xs:long"/>
+            <xs:element name="birthYear" type="xs:int"/>
+            <xs:element name="mail" type="xs:string"/>
+            <xs:element name="address" type="tns:AddressDetail" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AddressDetail">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="country" type="xs:string"/>
+            <xs:element name="street" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

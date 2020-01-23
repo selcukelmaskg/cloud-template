@@ -1,0 +1,36 @@
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev
+            - name: SPRING_DATA_MONGODB_URI
+              value: mongodb://mongodb
+            - name: SPRING_DATASOURCE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: database-user
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: database-password
+            - name: EUREKA_SERVER_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-boot-bootstrap
+                  key: eureka-host
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 9010
+              scheme: HTTP
+            initialDelaySeconds: 180
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 9010
+              scheme: HTTP
+            initialDelaySeconds: 30
