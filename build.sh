@@ -3,7 +3,7 @@
 #read serviceName
 
 #serviceName="api-documentation api-gateway asset-service catalog-service customer-service eureka-server logger-service order-service"
-serviceName="api-documentation api-gateway asset-service catalog-service converter-service customer-service eureka-server logger-service order-service"
+serviceName="api-documentation api-gateway asset-service catalog-service customer-service eureka-server logger-service order-service"
 LC_ALL=C
 serviceName=$(echo "$serviceName" | sed 's/ /,/g')
 echo ${serviceName}
