@@ -1,10 +1,8 @@
 package com.cloudtemplate.customerservice.service.address.impl;
 
-import com.crmpoc.customer.AddressDetail;
 import com.cloudtemplate.customerservice.domain.Address;
 import com.cloudtemplate.customerservice.repository.AddressRepository;
 import com.cloudtemplate.customerservice.service.address.AddressService;
-import com.cloudtemplate.shared.util.ObjectMapperUtils;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class AddressServiceImplTest {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -32,39 +31,43 @@ class AddressServiceImplTest {
 
     @Test
     void findById() {
-        AddressDetail addressDetail = getMockAddressDetail();
-        when(addressRepository.findById(1L)).thenReturn(Optional.of(ObjectMapperUtils.map(addressDetail, Address.class)));
+        Address address = getMockAddress();
+        when(addressRepository.findById(1L)).thenReturn(Optional.of(address));
         when(addressRepository.findById(2L)).thenReturn(Optional.empty());
 
-        Assert.assertEquals(addressDetail.getId(), addressService.findById(1L).getId());
+        Assert.assertEquals(address.getId(), addressService.findById(1L).getId());
         Assert.assertNull(addressService.findById(2L));
         log.info("[addressService -> findById]: successfully completed !");
     }
 
     @Test
     void findAll() {
-        AddressDetail addressDetail = getMockAddressDetail();
-        List<AddressDetail> allAddressDetails = new ArrayList<>();
+        List<Address> allAddresses = getMockAddresses();
 
-        for (int i = 0; i < 5; i++) {
-            allAddressDetails.add(addressDetail);
-        }
+        when(addressRepository.findAll()).thenReturn(allAddresses);
 
-        List<Address> allAddress = ObjectMapperUtils.mapAll(allAddressDetails, Address.class);
-
-        when(addressRepository.findAll()).thenReturn(allAddress);
-
-        Assert.assertEquals(allAddressDetails.size(), addressService.findAll().size());
+        Assert.assertEquals(allAddresses, addressService.findAll());
         log.info("[addressService -> findAll]: successfully completed !");
     }
 
-    private AddressDetail getMockAddressDetail() {
-        AddressDetail mockAdressDetail = new AddressDetail();
-        mockAdressDetail.setId(1L);
-        mockAdressDetail.setCity("Ankara");
-        mockAdressDetail.setCountry("Türkiye");
-        mockAdressDetail.setStreet("Mamak");
+    private Address getMockAddress() {
+        Address mockAddress = new Address();
+        mockAddress.setId(1L);
+        mockAddress.setCity("Ankara");
+        mockAddress.setCountry("Türkiye");
+        mockAddress.setStreet("Mamak");
 
-        return mockAdressDetail;
+        return mockAddress;
+    }
+
+    private List<Address> getMockAddresses() {
+        Address address = getMockAddress();
+        List<Address> addresses = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            addresses.add(address);
+        }
+
+        return addresses;
     }
 }

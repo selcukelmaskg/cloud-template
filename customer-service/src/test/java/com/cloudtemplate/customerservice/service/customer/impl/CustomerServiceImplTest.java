@@ -1,12 +1,10 @@
 package com.cloudtemplate.customerservice.service.customer.impl;
 
 
-import com.crmpoc.customer.AddressDetail;
-import com.crmpoc.customer.CustomerDetails;
+import com.cloudtemplate.customerservice.domain.Address;
 import com.cloudtemplate.customerservice.domain.Customer;
 import com.cloudtemplate.customerservice.repository.CustomerRepository;
 import com.cloudtemplate.customerservice.service.customer.CustomerService;
-import com.cloudtemplate.shared.util.ObjectMapperUtils;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,41 +32,34 @@ public class CustomerServiceImplTest {
 
     @Test
     public void findById() {
-        CustomerDetails customerDetails = getMockCustomerDetail();
+        Customer customer = getMockCustomer();
 
-        when(customerRepository.findById(1L)).thenReturn(Optional.of(ObjectMapperUtils.map(customerDetails, Customer.class)));
+        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
         when(customerRepository.findById(2L)).thenReturn(Optional.empty());
 
-        Assert.assertEquals(customerDetails.getTckn(), customerService.findById(1L).getTckn());
+        Assert.assertEquals(customer.getTckn(), customerService.findById(1L).getTckn());
         Assert.assertNull(customerService.findById(2L));
         log.info("[customerService -> findById]: successfully completed !");
     }
 
     @Test
     public void findAll() {
-        CustomerDetails customerDetails = getMockCustomerDetail();
-        List<CustomerDetails> allCustomerDetails = new ArrayList<>();
+        List<Customer> customers = getMockCustomers();
 
-        for (int i = 0; i < 5; i++) {
-            allCustomerDetails.add(customerDetails);
-        }
+        when(customerRepository.findAll()).thenReturn(customers);
 
-        List<Customer> allCustomer = ObjectMapperUtils.mapAll(allCustomerDetails, Customer.class);
-
-        when(customerRepository.findAll()).thenReturn(allCustomer);
-
-        Assert.assertEquals(allCustomerDetails.size(), customerService.findAll().size());
+        Assert.assertEquals(customers, customerService.findAll());
         log.info("[customerService -> findAll]: successfully completed !");
     }
 
-    private CustomerDetails getMockCustomerDetail() {
-        CustomerDetails mockProductDetail = new CustomerDetails();
+    private Customer getMockCustomer() {
+        Customer mockProductDetail = new Customer();
         mockProductDetail.setTckn(Long.parseLong("67204082123"));
         mockProductDetail.setName("lol");
         mockProductDetail.setSurname("lul");
         mockProductDetail.setBirthYear(1990);
 
-        AddressDetail addressDetail = new AddressDetail();
+        Address addressDetail = new Address();
         addressDetail.setId(Long.parseLong("1"));
         addressDetail.setCity("Istanbul");
         addressDetail.setCountry("Türkiye");
@@ -77,5 +68,16 @@ public class CustomerServiceImplTest {
         mockProductDetail.setAddress(addressDetail);
 
         return mockProductDetail;
+    }
+
+    private List<Customer> getMockCustomers() {
+        Customer customer = getMockCustomer();
+
+        List<Customer> customers = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            customers.add(customer);
+        }
+        return customers;
     }
 }

@@ -3,8 +3,6 @@ package com.cloudtemplate.customerservice.service.customer.impl;
 import com.cloudtemplate.customerservice.domain.Customer;
 import com.cloudtemplate.customerservice.repository.CustomerRepository;
 import com.cloudtemplate.customerservice.service.customer.CustomerService;
-import com.crmpoc.customer.CustomerDetails;
-import com.cloudtemplate.shared.util.ObjectMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
@@ -27,34 +25,34 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Cacheable(key = "#tckn")
-    public CustomerDetails findById(Long tckn) {
-        return ObjectMapperUtils.map(repository.findById(tckn).orElse(null), CustomerDetails.class);
+    public Customer findById(Long tckn) {
+        return repository.findById(tckn).orElse(null);
     }
 
     @Override
     @Cacheable
-    public List<CustomerDetails> findAll() {
-        return ObjectMapperUtils.mapAll(repository.findAll(), CustomerDetails.class);
+    public List<Customer> findAll() {
+        return repository.findAll();
     }
 
     @Override
     @CacheEvict(allEntries = true)
-    public void save(CustomerDetails customerDetails) {
-        Customer customer = repository.save(ObjectMapperUtils.map(customerDetails, Customer.class));
+    public void save(Customer customer) {
+        Customer savedCustomer = repository.save(customer);
         log.info("[customerSaved]: Clear address cache !");
-        log.info("[customerSaved]: Data:\n {}", customer);
-        log.info("[customerSaved]: Send Mail : {}", customer.getMail());
+        log.info("[customerSaved]: Data:\n {}", savedCustomer);
+        log.info("[customerSaved]: Send Mail : {}", savedCustomer.getMail());
     }
 
     @Override
     @CacheEvict(allEntries = true)
-    public void update(CustomerDetails customerDetails) {
-        if (!repository.existsById(customerDetails.getTckn())) {
-            log.warn("tckn: {} customer not found.", customerDetails.getTckn());
+    public void update(Customer customer) {
+        if (!repository.existsById(customer.getTckn())) {
+            log.warn("tckn: {} customer not found.", customer.getTckn());
             return;
         }
 
-        save(customerDetails);
+        save(customer);
     }
 
     @Override

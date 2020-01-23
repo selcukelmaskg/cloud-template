@@ -1,11 +1,8 @@
 package com.cloudtemplate.customerservice.service.address.impl;
 
-import com.cloudtemplate.customerservice.service.address.AddressService;
-import com.crmpoc.customer.AddressDetail;
 import com.cloudtemplate.customerservice.domain.Address;
 import com.cloudtemplate.customerservice.repository.AddressRepository;
-import com.cloudtemplate.shared.util.ObjectMapperUtils;
-import javassist.NotFoundException;
+import com.cloudtemplate.customerservice.service.address.AddressService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
@@ -28,27 +25,27 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     @Cacheable(key = "#id")
-    public AddressDetail findById(Long id) {
-        return ObjectMapperUtils.map(repository.findById(id).orElse(null), AddressDetail.class);
+    public Address findById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     @Cacheable
-    public List<AddressDetail> findAll() {
-        return ObjectMapperUtils.mapAll(repository.findAll(), AddressDetail.class);
+    public List<Address> findAll() {
+        return repository.findAll();
     }
 
     @Override
     @CacheEvict(allEntries = true)
-    public void save(AddressDetail addressDetail) {
-        Address address = repository.save(ObjectMapperUtils.map(addressDetail, Address.class));
+    public void save(Address address) {
+        Address savedAddress = repository.save(address);
         log.info("[addressSaved]: Clear address cache !");
-        log.info("[addressSaved]: Data:\n {}", address);
+        log.info("[addressSaved]: Data:\n {}", savedAddress);
     }
 
     @Override
     @CacheEvict(allEntries = true)
-    public void update(AddressDetail addressDetail) throws NotFoundException {
+    public void update(Address addressDetail) {
         if (!repository.existsById(addressDetail.getId())) {
             log.warn("id: {} address not found.", addressDetail.getId());
             return;
