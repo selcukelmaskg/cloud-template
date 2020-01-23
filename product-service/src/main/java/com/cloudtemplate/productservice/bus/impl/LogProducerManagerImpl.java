@@ -1,6 +1,6 @@
-package com.cloudtemplate.assetservice.bus.impl;
+package com.cloudtemplate.productservice.bus.impl;
 
-import com.cloudtemplate.assetservice.bus.LogProducerManager;
+import com.cloudtemplate.productservice.bus.LogProducerManager;
 import com.cloudtemplate.shared.constans.LogStatus;
 import com.cloudtemplate.shared.dto.logger.LogDto;
 import org.slf4j.Logger;

@@ -1,19 +1,18 @@
 package com.cloudtemplate.customerservice.service.address;
 
-import com.crmpoc.customer.AddressDetail;
-import javassist.NotFoundException;
+import com.cloudtemplate.customerservice.domain.Address;
 import org.springframework.scheduling.annotation.Async;
 
 import java.util.List;
 
 public interface AddressService {
-    AddressDetail findById(Long id);
+    Address findById(Long id);
 
-    List<AddressDetail> findAll();
-
-    @Async
-    void save(AddressDetail addressDetail);
+    List<Address> findAll();
 
     @Async
-    void update(AddressDetail addressDetail) throws NotFoundException;
+    void save(Address address);
+
+    @Async
+    void update(Address address);
 }

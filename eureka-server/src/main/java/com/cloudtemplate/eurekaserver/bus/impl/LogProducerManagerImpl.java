@@ -17,7 +17,7 @@ import static com.cloudtemplate.shared.constans.ApplicationConstants.EXCEPT_LOG_
 
 @Service
 public class LogProducerManagerImpl implements LogProducerManager {
-    private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Value("${kafka.topic.log}")
     private String logTopic;
@@ -58,7 +58,7 @@ public class LogProducerManagerImpl implements LogProducerManager {
     }
 
     private void sendLogEvent(LogDto log) {
-        LOG.debug("[sendLogEvent] MessageEvent object is sending.. -> {}", log);
+        this.log.debug("[sendLogEvent] MessageEvent object is sending.. -> {}", log);
 
         if (!EXCEPT_LOG_METHODS.contains(log.getMethodName())) {
             ListenableFuture<SendResult<String, Object>> future = this.kafkaTemplate.send(logTopic, log);
@@ -66,12 +66,12 @@ public class LogProducerManagerImpl implements LogProducerManager {
             future.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
                 @Override
                 public void onSuccess(SendResult<String, Object> result) {
-                    LOG.debug("[sendLogEvent] sent message='{}' with offset={}", log, result.getRecordMetadata().offset());
+                    LogProducerManagerImpl.this.log.debug("[sendLogEvent] sent message='{}' with offset={}", log, result.getRecordMetadata().offset());
                 }
 
                 @Override
                 public void onFailure(Throwable ex) {
-                    LOG.error("[sendLogEvent] unable to send message='{}'", log, ex);
+                    LogProducerManagerImpl.this.log.error("[sendLogEvent] unable to send message='{}'", log, ex);
                 }
 
             });

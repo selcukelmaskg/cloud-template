@@ -30,9 +30,9 @@ public class AssetServiceImpl implements AssetService {
 
     @Override
     public String ipBinding(String orderId) {
-        if (orderClient.validateOrder(orderId)) {
+        if (Boolean.TRUE.equals(orderClient.validateOrder(orderId))) {
             String ip = IpAddressUtil.generateIp();
-            if (!repository.existsAssetByIp(ip)) {
+            if (Boolean.FALSE.equals(repository.existsAssetByIp(ip))) {
                 save(new Asset(orderId, ip));
                 return ip;
             } else {
@@ -52,7 +52,7 @@ public class AssetServiceImpl implements AssetService {
     @Override
     @CacheEvict(allEntries = true)
     public void save(Asset asset) {
-        log.info("[assetSaved]: {}", asset.toString());
+        log.info("[assetSaved]: {}", asset);
         repository.save(asset);
     }
 

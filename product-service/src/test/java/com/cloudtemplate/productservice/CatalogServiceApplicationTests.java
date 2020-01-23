@@ -1,10 +1,14 @@
-package com.cloudtemplate.loggerservice;
+package com.cloudtemplate.productservice;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-class LoggerServiceApplicationTests {
+class CatalogServiceApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
 }

@@ -1,21 +1,20 @@
 package com.cloudtemplate.customerservice.service.customer;
 
-import com.crmpoc.customer.CustomerDetails;
-import javassist.NotFoundException;
+import com.cloudtemplate.customerservice.domain.Customer;
 import org.springframework.scheduling.annotation.Async;
 
 import java.util.List;
 
 public interface CustomerService {
-    CustomerDetails findById(Long tckn);
+    Customer findById(Long tckn);
 
-    List<CustomerDetails> findAll();
-
-    @Async
-    void save(CustomerDetails customerDetails);
+    List<Customer> findAll();
 
     @Async
-    void update(CustomerDetails customerDetails);
+    void save(Customer customer);
+
+    @Async
+    void update(Customer customer);
 
     Boolean existInCustomers(Long tckn);
 }
