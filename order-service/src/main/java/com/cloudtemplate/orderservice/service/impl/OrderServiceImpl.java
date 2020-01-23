@@ -57,9 +57,7 @@ public class OrderServiceImpl implements OrderService {
         order = repository.save(order);
 
         Order finalOrder = order;
-        new Thread(() -> {
-            captureOrder(finalOrder);
-        }).start();
+        new Thread(() -> captureOrder(finalOrder)).start();
 
         log.info("[orderService -> save]: order created !");
 
@@ -86,8 +84,8 @@ public class OrderServiceImpl implements OrderService {
 
     private void captureOrder(Order order) {
         try {
-            if (converterClient.customerValidation(order.getTckn())) {
-                if (converterClient.orderFulfilment(order.getProductId())) {
+            if (Boolean.TRUE.equals(converterClient.customerValidation(order.getTckn()))) {
+                if (Boolean.TRUE.equals(converterClient.orderFulfilment(order.getProductId()))) {
                     String ip = assetClient.assetBinding(new AssetBindingRequest(order.getId()));
                     if (ip != null) {
                         order.setSystemMessage(environment.getProperty(ORDER_SUCCESS_MSG));

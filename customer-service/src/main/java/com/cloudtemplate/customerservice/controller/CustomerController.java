@@ -27,6 +27,7 @@ public class CustomerController {
         return customerService.findById(tckn);
     }
 
+    // TODO: bilalkocoglu => replace this persistent entity with dto object
     @PostMapping
     public void createCustomer(@RequestBody Customer customer) {
         customerService.save(customer);
@@ -37,6 +38,7 @@ public class CustomerController {
         return customerService.findAll();
     }
 
+    // TODO: bilalkocoglu => replace this persistent entity with dto object
     @PutMapping
     public void updateCustomer(@RequestBody Customer customer) {
         customerService.update(customer);

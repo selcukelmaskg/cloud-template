@@ -34,11 +34,13 @@ public class ProductController {
         return productService.findAll();
     }
 
+    // TODO: bilalkocoglu => replace this persistent entity with dto object
     @PostMapping
     public void saveProduct(@RequestBody Product product) {
         productService.save(product);
     }
 
+    // TODO: bilalkocoglu => replace this persistent entity with dto object
     @PutMapping
     public void updateProduct(@RequestBody Product product) {
         productService.update(product);

@@ -27,7 +27,7 @@ public class LogConsumerManager {
                 this.logService.save(log);
             }
         }catch (Exception e) {
-            System.out.println("error");
+            this.log.error("log save error => {}", e.getMessage());
         }
     }
 }

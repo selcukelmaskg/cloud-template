@@ -2,8 +2,6 @@ package com.cloudtemplate.customerservice.controller;
 
 import com.cloudtemplate.customerservice.domain.Address;
 import com.cloudtemplate.customerservice.service.address.AddressService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +16,6 @@ import java.util.List;
 @RequestMapping(AddressController.END_POINT)
 public class AddressController {
     static final String END_POINT = "/api/address";
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final AddressService addressService;
 
@@ -26,6 +23,7 @@ public class AddressController {
         this.addressService = addressService;
     }
 
+    // TODO: bilalkocoglu => replace this persistent entity with dto object
     @PostMapping
     public void save(@RequestBody Address address) {
         addressService.save(address);
@@ -41,6 +39,7 @@ public class AddressController {
         return addressService.findById(id);
     }
 
+    // TODO: bilalkocoglu => replace this persistent entity with dto object
     @PutMapping
     public void updateAddress(@RequestBody Address address) {
         addressService.update(address);
