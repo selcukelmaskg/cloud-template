@@ -13,9 +13,6 @@ public class ApplicationConstants {
     public static final String DEFAULT_SWAGGER_URL = "/v2/api-docs";
     public static final String KEY_SWAGGER_URL = "swagger_url";
 
-    public static final String CUSTOMER_ENDPOINT = "http://www.crmpoc.com/customer";
-    public static final String CATALOG_ENDPOINT = "http://www.crmpoc.com/catalog";
-
     public static final String ZONE_ID = "Europe/Istanbul";
 
     public static final List<String> EXCEPT_LOG_METHODS = Arrays.asList("info");
@@ -26,6 +23,10 @@ public class ApplicationConstants {
     public static final String ORDER_FAIL_CATALOG_MSG = "order.message.fail.catalog";
     public static final String ORDER_FAIL_SYSTEM_MSG = "order.message.fail.system";
 
+    public static final int HEALTH_CHECK_RETRY_COUNT = 15;
+    public static final Long HEALTH_CHECK_WAIT_MILLISECOND = 10000L;
+    public static final String HEALTH_CHECK_DEFAULT_CONFIG_URL = "http://localhost:9999/actuator/health";
+    public static final String HEALTH_CHECK_CONFIG_URI_VARIABLE = "CONFIG_URI";
 
     private ApplicationConstants() {
         throw new IllegalStateException("Utility class");
