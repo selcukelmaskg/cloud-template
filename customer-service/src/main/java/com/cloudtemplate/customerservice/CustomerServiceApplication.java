@@ -1,6 +1,7 @@
 package com.cloudtemplate.customerservice;
 
 import com.cloudtemplate.shared.util.DefaultProfileUtil;
+import com.cloudtemplate.shared.util.HealthCheckUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ public class CustomerServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(CustomerServiceApplication.class);
 		DefaultProfileUtil.addDefaultProfile(app);
+		HealthCheckUtil.configHealthCheck();
 		Environment env = app.run(args).getEnvironment();
 		logApplicationStartup(env);
 	}

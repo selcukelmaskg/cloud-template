@@ -1,6 +1,7 @@
 package com.cloudtemplate.apigateway;
 
 import com.cloudtemplate.shared.util.DefaultProfileUtil;
+import com.cloudtemplate.shared.util.HealthCheckUtil;
 import io.micrometer.core.instrument.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ public class ApiGatewayApplication {
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(ApiGatewayApplication.class);
 		DefaultProfileUtil.addDefaultProfile(app);
+		HealthCheckUtil.configHealthCheck();
 		Environment env = app.run(args).getEnvironment();
 		logApplicationStartup(env);
 	}

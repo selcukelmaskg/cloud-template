@@ -1,14 +1,17 @@
 package com.cloudtemplate.eurekaserver;
 
 import com.cloudtemplate.shared.util.DefaultProfileUtil;
+import com.cloudtemplate.shared.util.HealthCheckUtil;
 import io.micrometer.core.instrument.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -22,6 +25,7 @@ public class EurekaServerApplication {
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(EurekaServerApplication.class);
 		DefaultProfileUtil.addDefaultProfile(app);
+		HealthCheckUtil.configHealthCheck();
 		Environment env = app.run(args).getEnvironment();
 		logApplicationStartup(env);
 	}
@@ -57,5 +61,10 @@ public class EurekaServerApplication {
 		String configServerUri = env.getProperty("spring.cloud.config.uri");
 		log.info("\n----------------------------------------------------------\n\t" +
 				"Config Server: \t{}\n----------------------------------------------------------", configServerUri);
+	}
+
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
 	}
 }
