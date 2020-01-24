@@ -11,13 +11,11 @@ import static com.cloudtemplate.shared.constans.ApplicationConstants.SPRING_PROF
 
 public final class DefaultProfileUtil {
 
-
     private DefaultProfileUtil() {
     }
 
     public static void addDefaultProfile(SpringApplication app) {
         Map<String, Object> defProperties = new HashMap<>();
-
         defProperties.put(SPRING_PROFILE_DEFAULT, SPRING_PROFILE_DEVELOPMENT);
         app.setDefaultProperties(defProperties);
     }

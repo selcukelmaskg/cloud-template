@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: logger-service
+  config:
+    name: logger-service
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URL:http://localhost:9999}

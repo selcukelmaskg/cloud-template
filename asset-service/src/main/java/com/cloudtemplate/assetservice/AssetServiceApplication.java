@@ -1,6 +1,7 @@
 package com.cloudtemplate.assetservice;
 
 import com.cloudtemplate.shared.util.DefaultProfileUtil;
+import com.cloudtemplate.shared.util.HealthCheckUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ public class AssetServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(AssetServiceApplication.class);
 		DefaultProfileUtil.addDefaultProfile(app);
+		HealthCheckUtil.configHealthCheck();
 		Environment env = app.run(args).getEnvironment();
 		logApplicationStartup(env);
 	}
@@ -60,6 +62,10 @@ public class AssetServiceApplication {
 				hostAddress,
 				serverPort,
 				contextPath);
+
+		String configServerUri = env.getProperty("spring.cloud.config.uri");
+		log.info("\n----------------------------------------------------------\n\t" +
+				"Config Server: \t{}\n----------------------------------------------------------", configServerUri);
 	}
 
 }

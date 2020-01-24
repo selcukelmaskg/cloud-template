@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: asset-service
+  config:
+    name: asset-service
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URL:http://localhost:9999}

@@ -1,6 +1,7 @@
 package com.cloudtemplate.orderservice;
 
 import com.cloudtemplate.shared.util.DefaultProfileUtil;
+import com.cloudtemplate.shared.util.HealthCheckUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,7 @@ public class OrderServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(OrderServiceApplication.class);
 		DefaultProfileUtil.addDefaultProfile(app);
+		HealthCheckUtil.configHealthCheck();
 		Environment env = app.run(args).getEnvironment();
 		logApplicationStartup(env);
 	}
@@ -63,16 +65,8 @@ public class OrderServiceApplication {
 				hostAddress,
 				serverPort,
 				contextPath);
-	}
-
-	@Bean
-	public Executor asyncExecutor() {
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(5);
-		executor.setMaxPoolSize(5);
-		executor.setQueueCapacity(500);
-		executor.setThreadNamePrefix("Asynchronous Process-");
-		executor.initialize();
-		return executor;
+		String configServerUri = env.getProperty("spring.cloud.config.uri");
+		log.info("\n----------------------------------------------------------\n\t" +
+				"Config Server: \t{}\n----------------------------------------------------------", configServerUri);
 	}
 }
