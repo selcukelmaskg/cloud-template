@@ -1,4 +1,0 @@
-eureka:
-  server:
-    host: eureka-server
-    port: 8090

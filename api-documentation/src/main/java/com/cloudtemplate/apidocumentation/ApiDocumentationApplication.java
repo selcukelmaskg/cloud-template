@@ -59,6 +59,10 @@ public class ApiDocumentationApplication {
 				hostAddress,
 				serverPort,
 				contextPath);
+
+		String configServerUri = env.getProperty("spring.cloud.config.uri");
+		log.info("\n----------------------------------------------------------\n\t" +
+				"Config Server: \t{}\n----------------------------------------------------------", configServerUri);
 	}
 
 }

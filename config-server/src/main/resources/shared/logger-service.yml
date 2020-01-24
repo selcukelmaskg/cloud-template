@@ -1,0 +1,101 @@
+spring:
+  application:
+    name: logger-service
+  kafka:
+    consumer:
+      group-id: logger-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+server:
+  port: 9090
+  servlet:
+    session:
+      cookie:
+        http-only: true
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}-${random.uuid}
+  client:
+    service-url:
+      defaultZone: http://${eureka.server.host}:8090/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  server:
+    host: localhost
+    port: 8090
+
+kafka:
+  topic:
+    log: system-log
+
+management:
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+
+---
+
+spring:
+  profiles: dev
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: crmpoc-logger-service
+  kafka:
+    bootstrap-servers: localhost:9092
+
+eureka:
+  instance:
+    prefer-ip-address: true
+
+---
+
+spring:
+  profiles: docker
+  data:
+    mongodb:
+      uri: mongodb://mongodb:27017
+      database: crmpoc-logger-service
+  kafka:
+    bootstrap-servers: kafka:9092
+
+eureka:
+  server:
+    host: eureka-server
+    port: 8090
+  instance:
+    prefer-ip-address: true
+
+---
+
+spring:
+  profiles: prod
+  data:
+    mongodb:
+      uri: mongodb://mongodb:27017
+      database: crmpoc-logger-service
+  kafka:
+    bootstrap-servers: kafka:9092
+
+eureka:
+  instance:
+    prefer-ip-address: true
+
+---
+
+spring:
+  profiles: test
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: crmpoc-logger-service
+  kafka:
+    bootstrap-servers: localhost:9092
+
+eureka:
+  instance:
+    prefer-ip-address: true

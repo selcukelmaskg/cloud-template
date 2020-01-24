@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: customer-service
+  config:
+    name: customer-service
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URL:http://localhost:9999}

@@ -1,0 +1,72 @@
+server:
+  port: 9060
+spring:
+  application:
+    name: api-gateway
+
+management:
+  endpoint:
+    routes:
+      enabled: true
+    health:
+      enabled: true
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+ribbon:
+  ReadTimeout: 60000
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}-${random.uuid}
+  client:
+    service-url:
+      defaultZone: http://${eureka.server.host}:${eureka.server.port}/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  server:
+    host: localhost
+    port: 8090
+
+---
+
+spring:
+  profiles: dev
+
+eureka:
+  instance:
+    prefer-ip-address: true
+
+---
+
+spring:
+  profiles: docker
+
+eureka:
+  server:
+    host: eureka-server
+    port: 8090
+  instance:
+    prefer-ip-address: true
+
+---
+
+spring:
+  profiles: prod
+
+eureka:
+  instance:
+    prefer-ip-address: true
+
+---
+
+spring:
+  profiles: test
+
+eureka:
+  instance:
+    prefer-ip-address: true
+

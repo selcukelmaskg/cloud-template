@@ -15,7 +15,7 @@ public class LoggingAspect {
         this.log = log;
     }
 
-    @Pointcut("within(@org.springframework.ws.server.endpoint.annotation.Endpoint *)")
+    @Pointcut("within(@org.springframework.web.bind.annotation.RestController *)")
     public void springBeanPointcut() {
     }
 
