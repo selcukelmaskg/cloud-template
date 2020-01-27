@@ -10,7 +10,7 @@ spring:
           search-locations: classpath:/shared/
 
 server:
-  port: 9999
+  port: 8888
 
 eureka:
   instance:
