@@ -50,7 +50,7 @@ spring:
   profiles: dev
   data:
     mongodb:
-      uri: mongodb://localhost:27017
+      uri: ${mongodb.order.uri:${mongodb.uri:mongodb://localhost:27017}}
       database: crmpoc-order-service
   kafka:
     bootstrap-servers: localhost:9092
@@ -65,7 +65,7 @@ spring:
   profiles: docker
   data:
     mongodb:
-      uri: mongodb://mongodb:27017
+      uri: ${mongodb.order.uri:${mongodb.uri:mongodb://mongodb:27017}}
       database: crmpoc-order-service
   kafka:
     bootstrap-servers: kafka:9092
@@ -84,7 +84,7 @@ spring:
   profiles: prod
   data:
     mongodb:
-      uri: mongodb://mongodb:27017
+      uri: ${mongodb.order.uri:${mongodb.uri:mongodb://mongodb:27017}}
       database: crmpoc-order-service
   kafka:
     bootstrap-servers: kafka:9092
@@ -99,7 +99,7 @@ spring:
   profiles: test
   data:
     mongodb:
-      uri: mongodb://localhost:27017
+      uri: ${mongodb.order.uri:${mongodb.uri:mongodb://localhost:27017}}
       database: crmpoc-order-service
   kafka:
     bootstrap-servers: localhost:9092

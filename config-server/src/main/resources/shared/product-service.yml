@@ -63,9 +63,9 @@ management:
 spring:
   profiles: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/crm_poc_catalog?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password: admin
+    url: ${jdbc.product.url:${jdbc.url:jdbc:mysql://localhost:3306/crm_poc_catalog?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC}}
+    username: ${jdbc.product.username:${jdbc.username:root}}
+    password: ${jdbc.product.password:${jdbc.password:admin}}
   kafka:
     bootstrap-servers: localhost:9092
 
@@ -78,9 +78,9 @@ eureka:
 spring:
   profiles: docker
   datasource:
-    url: jdbc:mysql://mysql:3306/crm_poc_catalog?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password: admin
+    url: ${jdbc.product.url:${jdbc.url:jdbc:mysql://mysql:3306/crm_poc_catalog?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC}}
+    username: ${jdbc.product.username:${jdbc.username:root}}
+    password: ${jdbc.product.password:${jdbc.password:admin}}
   kafka:
     bootstrap-servers: kafka:9092
 
@@ -89,9 +89,9 @@ spring:
 spring:
   profiles: prod
   datasource:
-    url: jdbc:mysql://mysql:3306/crm_poc_catalog?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password: admin
+    url: ${jdbc.product.url:${jdbc.url:jdbc:mysql://mysql:3306/crm_poc_catalog?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC}}
+    username: ${jdbc.product.username:${jdbc.username:root}}
+    password: ${jdbc.product.password:${jdbc.password:admin}}
   kafka:
     bootstrap-servers: kafka:9092
 
@@ -100,9 +100,9 @@ spring:
 spring:
   profiles: test
   datasource:
-    url: jdbc:mysql://localhost:3306/crm_poc_catalog?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password: admin
+    url: ${jdbc.product.url:${jdbc.url:jdbc:mysql://localhost:3306/crm_poc_catalog?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC}}
+    username: ${jdbc.product.username:${jdbc.username:root}}
+    password: ${jdbc.product.password:${jdbc.password:admin}}
   kafka:
     bootstrap-servers: localhost:9092
 
