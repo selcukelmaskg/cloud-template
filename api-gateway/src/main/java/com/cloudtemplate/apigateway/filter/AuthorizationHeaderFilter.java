@@ -31,7 +31,9 @@ public class AuthorizationHeaderFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
 
         Set<String> headers = (Set<String>) ctx.get("ignoredHeaders");
-        headers.remove(AUTHORIZATION_HEADER);
+        if (headers != null) {
+            headers.remove(AUTHORIZATION_HEADER);
+        }
 
         return null;
     }

@@ -1,7 +1,7 @@
 package com.cloudtemplate.loggerservice.domain;
 
 import com.cloudtemplate.loggerservice.domain.base.BaseEntity;
-import com.cloudtemplate.shared.constans.LogStatus;
+import com.cloudtemplate.shared.enumeration.LogStatus;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;

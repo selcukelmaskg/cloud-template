@@ -1,7 +1,7 @@
-package com.cloudtemplate.customerservice.config;
+package com.cloudtemplate.uaaserver.config;
 
-import com.cloudtemplate.customerservice.security.AuthEntryPoint;
-import com.cloudtemplate.customerservice.security.AuthRequestFilter;
+import com.cloudtemplate.uaaserver.security.AuthEntryPoint;
+import com.cloudtemplate.uaaserver.security.AuthRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +41,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/v2/**").permitAll()
+                .antMatchers("/api/token-validation").permitAll()
+                .antMatchers("/api/login").permitAll()
+                .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/actuator/**").permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling().authenticationEntryPoint(authEntryPoint)

@@ -1,8 +1,8 @@
-package com.cloudtemplate.assetservice.bus.impl;
+package com.cloudtemplate.uaaserver.bus.impl;
 
-import com.cloudtemplate.assetservice.bus.LogProducerManager;
 import com.cloudtemplate.shared.enumeration.LogStatus;
 import com.cloudtemplate.shared.dto.logger.LogDto;
+import com.cloudtemplate.uaaserver.bus.LogProducerManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

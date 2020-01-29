@@ -1,4 +1,4 @@
-package com.cloudtemplate.shared.constans;
+package com.cloudtemplate.shared.enumeration;
 
 public enum LogStatus {
     SUCCESS("SUCCESS"),

@@ -25,7 +25,7 @@ public class ApiGatewayApplication {
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(ApiGatewayApplication.class);
 		DefaultProfileUtil.addDefaultProfile(app);
-		HealthCheckUtil.configHealthCheck();
+		HealthCheckUtil.configServerHealthCheck();
 		Environment env = app.run(args).getEnvironment();
 		logApplicationStartup(env);
 	}

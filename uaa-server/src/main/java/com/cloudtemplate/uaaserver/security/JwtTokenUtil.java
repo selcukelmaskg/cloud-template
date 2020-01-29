@@ -1,4 +1,4 @@
-package com.cloudtemplate.customerservice.security;
+package com.cloudtemplate.uaaserver.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

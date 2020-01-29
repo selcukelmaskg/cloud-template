@@ -1,4 +1,4 @@
-package com.cloudtemplate.customerservice.security;
+package com.cloudtemplate.uaaserver.security;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -15,6 +15,8 @@ public class AuthUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        //feign client customer service
         if ("javainuse".equals(username)) {
             Set<SimpleGrantedAuthority> authorities = new HashSet<>();
             authorities.add(new SimpleGrantedAuthority("ADMIN"));

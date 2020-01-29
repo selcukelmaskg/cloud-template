@@ -1,4 +1,4 @@
-package com.cloudtemplate.customerservice.security;
+package com.cloudtemplate.uaaserver.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.cloudtemplate.shared.constans.ApplicationConstants.AUTHORIZATION_HEADER;
+
 @Component
 public class AuthRequestFilter extends OncePerRequestFilter {
     @Autowired
@@ -25,7 +27,7 @@ public class AuthRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        final String requestTokenHeader = httpServletRequest.getHeader("Authorization");
+        final String requestTokenHeader = httpServletRequest.getHeader(AUTHORIZATION_HEADER);
 
         String username = null;
         String jwtToken = null;
