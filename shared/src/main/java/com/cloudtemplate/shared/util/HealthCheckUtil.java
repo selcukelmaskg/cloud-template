@@ -14,7 +14,7 @@ public final class HealthCheckUtil {
 
     public static final RestTemplate restTemplate = new RestTemplate();
 
-    public static void configHealthCheck() {
+    public static void configServerHealthCheck() {
         for (int i = HEALTH_CHECK_RETRY_COUNT; i > 0; i--) {
             try {
                 String systemHealthCheckUri = System.getenv(HEALTH_CHECK_CONFIG_URI_VARIABLE);

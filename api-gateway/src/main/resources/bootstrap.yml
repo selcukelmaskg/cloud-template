@@ -5,4 +5,4 @@ spring:
     name: api-gateway
   cloud:
     config:
-      uri: ${CONFIG_SERVER_URL:http://localhost:9999}
+      uri: ${CONFIG_SERVER_URL:http://localhost:8888}

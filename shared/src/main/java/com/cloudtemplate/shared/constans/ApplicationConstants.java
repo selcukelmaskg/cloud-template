@@ -25,8 +25,10 @@ public class ApplicationConstants {
 
     public static final int HEALTH_CHECK_RETRY_COUNT = 15;
     public static final Long HEALTH_CHECK_WAIT_MILLISECOND = 10000L;
-    public static final String HEALTH_CHECK_DEFAULT_CONFIG_URL = "http://localhost:9999/actuator/health";
+    public static final String HEALTH_CHECK_DEFAULT_CONFIG_URL = "http://localhost:8888/actuator/health";
     public static final String HEALTH_CHECK_CONFIG_URI_VARIABLE = "CONFIG_URI";
+
+    public static final String AUTHORIZATION_HEADER = "authorization";
 
     private ApplicationConstants() {
         throw new IllegalStateException("Utility class");

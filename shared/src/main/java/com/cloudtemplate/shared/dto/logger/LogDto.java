@@ -1,6 +1,6 @@
 package com.cloudtemplate.shared.dto.logger;
 
-import com.cloudtemplate.shared.constans.LogStatus;
+import com.cloudtemplate.shared.enumeration.LogStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

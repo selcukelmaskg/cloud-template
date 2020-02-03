@@ -25,7 +25,7 @@ public class EurekaServerApplication {
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(EurekaServerApplication.class);
 		DefaultProfileUtil.addDefaultProfile(app);
-		HealthCheckUtil.configHealthCheck();
+		HealthCheckUtil.configServerHealthCheck();
 		Environment env = app.run(args).getEnvironment();
 		logApplicationStartup(env);
 	}

@@ -1,7 +1,7 @@
 package com.cloudtemplate.eurekaserver.bus.impl;
 
 import com.cloudtemplate.eurekaserver.bus.LogProducerManager;
-import com.cloudtemplate.shared.constans.LogStatus;
+import com.cloudtemplate.shared.enumeration.LogStatus;
 import com.cloudtemplate.shared.dto.logger.LogDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
