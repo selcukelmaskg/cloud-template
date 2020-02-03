@@ -17,7 +17,7 @@ public class TokenValidationController {
 
     @GetMapping
     public String deneme(HttpServletRequest request) {
-        System.out.println("asdfasdfasdfasdfasd");
-        return "sdfasdf";
+        System.out.println("içerdesin");
+        return "içerdesin";
     }
 }

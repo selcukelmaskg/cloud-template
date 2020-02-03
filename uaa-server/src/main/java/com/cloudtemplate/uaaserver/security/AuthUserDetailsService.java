@@ -15,12 +15,12 @@ public class AuthUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
+        //call userserviceAccessor for username and password properties
         //feign client customer service
-        if ("javainuse".equals(username)) {
+        if ("testnihal".equals(username)) {
             Set<SimpleGrantedAuthority> authorities = new HashSet<>();
             authorities.add(new SimpleGrantedAuthority("ADMIN"));
-            return new User("javainuse", "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6", authorities);
+            return new User("testnihal", "2c9341ca4cf3d87b9e4eb905d6a3ec45", authorities);
         } else {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }

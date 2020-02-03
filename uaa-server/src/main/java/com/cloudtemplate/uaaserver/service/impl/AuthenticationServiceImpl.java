@@ -6,7 +6,6 @@ import com.cloudtemplate.uaaserver.service.AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,7 +17,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private CustomAuthenticationManager authenticationManager;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;

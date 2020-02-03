@@ -38,6 +38,16 @@ management:
 
 spring:
   profiles: dev
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 1
+    driverClassName: org.postgresql.Driver
   kafka:
     bootstrap-servers: localhost:9092
 
